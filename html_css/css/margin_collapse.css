@@ -1,0 +1,39 @@
+.main-background {
+  width: 100%;
+  height: 500px;
+  background-image: url();
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*  
+  background-image: url(), url(); 여러 이미지 겹치기
+  background-size: 100%; 내 영역의 100% 가로를 채워주세요
+  background-size: contain; 빈 공간이 남아도 되니 배경이 짤리면 안된다
+  background-size: cover; 배경이 짤려도 상관없으니 빈 공간 없이 배경으로 채워라
+  background-position 배경으로 불러올 이미지 위치 조정 
+  background-attachment 스크롤시 배경위치 조정
+  background-attachment: fixed; 스크롤해도 배경이미지 고정됨
+  filter: brightness(70%); 배경이미지에 필터입힌다 단, 해당 요소 안에 글씨에도 필터가 입혀진다
+  */
+}
+
+.main-title {
+  color: white;
+  font-size: 40px;
+  margin-top: 300px;
+  /* 
+  margin collapse 현상
+  감싸는 박스, 내부 박스 2개가 위쪽 테두리가 겹치면 
+  Margin이 하나로 합쳐지기 때문에
+  main-title에 마진을 적용해도 main-background에도 마진이 생긴다
+
+  이러한 문제를 해결하기 위해서는
+  부모 박스에 padding을 줘서 위쪽 테두리가 붙여지지 않도록 설정하면 된다 
+
+  한편, 위의 박스 아랫면과 아래 박스 윗면이 겹치는 경우에도
+  박스 2개 위아래 테두리가 겹치기 때문에 margin collapse가 발생한다
+
+  이런 경우에 위 박스에 margin-bottom: 50px
+  아래 박스에 margin-top: 30px을 주게 되면 두 박스 사이의 간격은 20px가 된다
+
+  */
+}
