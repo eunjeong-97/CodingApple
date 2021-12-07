@@ -1,5 +1,6 @@
 body {
   font-family: 'nanumsquare';
+  box-sizing: border-box;
 }
 
 .black-nav {
@@ -8,4 +9,12 @@ body {
   background: black;
   color: white;
   font-weight: 600;
+  font-size: 20px;
+}
+
+.list {
+  margin-top: 30px;
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
 }
