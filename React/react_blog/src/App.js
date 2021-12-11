@@ -5,10 +5,10 @@ function App() {
 
   let [글제목, 글제목변경] = useState(['남자코드 추천', '강남 우동 맛집', '파이썬 독학']);
   let [따봉수, 따봉수변경] = useState(0);
-  let [modal, modal변경] = useState(false);
   let [누른제목, 누른제목변경] = useState();
+  let [발행할제목, 발행할제목변경] = useState('');
 
-  console.log(누른제목);
+  console.log(글제목);
 
   function 블로그제목변경() {
     // let newArray = 글제목; 얕은복사를 하게 됨
@@ -23,6 +23,12 @@ function App() {
     글제목변경(newArray);
   }  
 
+  function 블로그제목발행() {
+    let newArray = [...글제목];
+    newArray.push(발행할제목);
+    글제목변경(newArray);
+  }
+
   return (
     <div className="App">
       <div className="black-nav">
@@ -33,7 +39,7 @@ function App() {
 
       {글제목.map((a, index) => {
         return (
-          <div className="list">
+          <div className="list" key={index}>
             <h3 onClick={()=>{누른제목변경(index);}}>
               {a} <button onClick={블로그제목변경}>글 제목 변경</button>
             </h3>
@@ -54,6 +60,11 @@ function App() {
         );
       })}
       {누른제목 !== undefined && <Modal 글제목={글제목} 누른제목={누른제목}></Modal>}
+      {/* 글 발행하는 UI */}
+      <div className='publish'>
+        <input placeholder='글제목 입력' onChange={e=>{발행할제목변경(e.target.value);}}/>
+        <button onClick={블로그제목발행}>저장</button>
+      </div>
     </div>
   );
 }
