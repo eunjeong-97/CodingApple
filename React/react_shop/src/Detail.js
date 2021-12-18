@@ -64,6 +64,7 @@ const Detail = props => {
       .then(response => {
         shoes변경([...shoes, ...response.data]);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

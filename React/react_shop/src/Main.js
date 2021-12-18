@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Jumbotron from "./Jumbotron";
@@ -6,6 +7,11 @@ import Jumbotron from "./Jumbotron";
 const Main = props => {
   const { shoes, shoes변경 } = props;
   let [로딩화면보여짐, 로딩화면보여짐변경] = useState(false);
+
+  useEffect(() => {
+    로딩화면보여짐변경(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="Main">
@@ -47,17 +53,23 @@ const Main = props => {
 const Product = (props) => {
   const { shoesItem } = props;
   return (
+    
     <div className="col-md-4">
-      <img
-        src={`https://codingapple1.github.io/shop/shoes${shoesItem.id + 1}.jpg`}
-        width="100%"
-        alt='img'
+      <Link to={`/detail/${shoesItem.id}`}>
+        <img
+          src={`https://codingapple1.github.io/shop/shoes${
+            shoesItem.id + 1
+          }.jpg`}
+          width="100%"
+          alt="img"
       />
-      <h4>{shoesItem.title}</h4>
-      <p>
-        {shoesItem.content} & {shoesItem.price}
-      </p>
-    </div>
+      </Link>
+        <h4>{shoesItem.title}</h4>
+        <p>
+          {shoesItem.content} & {shoesItem.price}
+        </p>
+      </div>
+    
   );
 };
 
