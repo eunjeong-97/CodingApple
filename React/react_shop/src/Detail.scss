@@ -1,0 +1,39 @@
+@import './_reset.scss';
+
+@mixin 함수() {
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: auto;
+}
+
+$메인색: #FF0000;
+
+.red {
+  background-color: $메인색;
+}
+
+div.Detail {
+  h4 {
+    color: tomato;
+    background-color: wheat;
+  }
+  p {
+    color: green;
+  }
+}
+
+.alert {
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: auto;
+  @extend .alert;
+  background-color: #ffe591;
+  @include 함수();
+  p {
+    margin-bottom: 0;
+  }
+}
