@@ -1,0 +1,64 @@
+<button id="버튼">버튼이에요</button>
+
+<script>
+  // 1.
+  var 사람 = {
+    name: "손흥민",
+    sayHi: function () {
+      console.log(`안녕 나는 ${this.name}`);
+    },
+  };
+
+  사람.sayHi();
+
+  // 2.
+  var 자료 = { data: [1, 2, 3, 4, 5] };
+
+  자료.전부더하기 = function () {
+    // 오른쪽부터 더하기
+    var 오른쪽부터 = 자료.data.reduceRight(function (인자1, 인자2) {
+      console.log({ 인자1, 인자2 });
+      return 인자1 + 인자2;
+    });
+
+    // 왼쪽부터 더하기
+    var 왼쪽부터 = 자료.data.reduce(function (인자1, 인자2) {
+      console.log({ 인자1, 인자2 });
+      return 인자1 + 인자2;
+    });
+
+    // forEach
+    var 합 = 0;
+    var 강의정답 = 자료.data.forEach(function (a) {
+      합 = 합 + a;
+    });
+
+    console.log({ 오른쪽부터, 왼쪽부터, 강의정답 });
+  };
+
+  자료.전부더하기();
+
+  // 3.
+  function 버튼누르기() {
+    setTimeout(function () {
+      console.log("안녕");
+    }, 1000);
+  }
+  document.getElementById("버튼").addEventListener("click", 버튼누르기);
+
+  // 강의
+  document.getElementById("버튼").addEventListener("click", function () {
+    var 버튼 = this;
+    setTimeout(function () {
+      // 근본없는 일바함수 -> this = window
+      console.log(this.innerHTML);
+      console.log(버튼); // 옛날방식
+    }, 1000);
+    // this
+    setTimeout(() => {
+      // 화살표함수는  바깥의 this와 동일하게 가져온다
+      // window로 새로 정의하지 않음
+      console.log(this.innerHTML);
+    }, 1000);
+  });
+</script>

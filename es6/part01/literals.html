@@ -1,0 +1,29 @@
+<div></div>
+<script>
+  var 변수 = "손흥민";
+  var 문자 = `안녕하세요 ${변수}입니다.`;
+
+  function 해체분석기(문자들, 변수1, 변수2) {
+    console.log({ 문자들 });
+    console.log({ 변수1 });
+    console.log({ 변수2 });
+    console.log(문자들[1] + 변수1 + 문자들[0]);
+  }
+  // tagged literal: 문자를 해체분석할 수 있음
+  해체분석기`안녕하세요${변수}입니다 사실은 ${변수}입니다.}`;
+
+  var pants = 20;
+  var socks = 100;
+  console.log(`원래문제: 바지${pants}양말${socks}`);
+
+  socks = 0;
+  // function 해체분석기2(문자들, ...변수들) 나머지매개변수로 사용해도 된다
+  function 해체분석기2(문자들, 바지개수, 양말개수) {
+    const [바지, 양말] = 문자들;
+    // console.log({ 문자들, 바지개수, 양말개수 });
+    // 양말${변수1} 바지${변수2}
+    console.log(`바꾼정답: ${양말}${바지개수}${바지}${양말개수 || "안팔아요"}`);
+  }
+
+  해체분석기2`바지${pants}양말${socks}`;
+</script>

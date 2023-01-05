@@ -1,0 +1,124 @@
+<div>
+  <div style="display: none">모달창0</div>
+  <div style="display: none">모달창1</div>
+  <div style="display: none">모달창2</div>
+
+  <button>버튼0</button>
+  <button>버튼1</button>
+  <button>버튼2</button>
+</div>
+<script>
+  //   if (true) {
+  //     let a = 1;
+  //     var b = 2;
+  //     if (true) {
+  //       let b = 3;
+  //     }
+  //     console.log(b); // 2
+  //   }
+
+  // 문제1
+  함수(); // 호이스팅되서 에러는 나지 않는다
+  function 함수() {
+    console.log(안녕); // let, const는 호이스팅되어도 undefined로 할당되지 않기 때문에 에러가 발생한다
+    let 안녕 = "Hello!";
+  }
+
+  // 문제2
+  함수(); // 함수가 아니라는 에러가 발생한다
+  // 함수표현식
+  // var 함수 (변수 선언부분)만 위로 호이스팅된다
+  var 함수 = function () {
+    // 해당 코드 자체에서는
+    // var 변수는 호이스팅되면서 undefined로 할당된다
+    console.log(안녕);
+    var 안녕 = "Hello!";
+  };
+
+  // 문제3
+  let a = 1;
+  var 함수 = function () {
+    a = 2;
+  }; // 함수에서 a값을 변경하지만, 함수를 따로 실행하지 않았기 때문에 그대로 1이 나온다
+  console.log(a); // 1
+
+  // 문제4
+  let a = 1; // 그냥변수 a
+  var b = 2; // 전역변수로 만들었기 때문에 window.b와 동일
+  window.a = 3; // 전역변수 a
+  window.b = 4; // 재햘당
+
+  // 따라서 b = 4
+  // 여기서 a는 전역변수보다는 let키워드로 선언한 a가 더 가깝기 때문에 a=1이 된다
+  console.log(a + b); // 5
+
+  // 문제5
+
+  // 반복문은 찰나의 순간에 1~5까지 반복된다
+  // 따라서 var로 선언된 전역변수 i값은 5로 존재함
+  //   var i = 5; var로 선언했기 때문에 i 변수는 이 위치에 존재함
+  for (var i = 1; i < 5; i++) {
+    setTimeout(function () {
+      // 자바스크립트가 위에서 아래로 읽기는 하지만 바로 실행되는 코드가 아님
+      //1~5초가 지나서 실행하려고 봤더니 변수 i값을 대입하려고 한다
+      console.log(i);
+    }, i * 1000);
+  }
+
+  // 원하는대로 실행시키고 싶다면?! -> let 키워드로 사용하기
+  for (let i = 0; i < array.length; i++) {
+    // let i = 0;
+    // 1~5초 후에 settimeout 안에 잇는 코드를 실행하려고 i를 찾는데
+    // for { } 안에 있는 let i을 사용할 수 있다
+    setTimeout(function () {
+      console.log(i);
+    }, i * 1000);
+  }
+
+  // 문제6
+  var 버튼들 = document.getElementsByTagName("button");
+  var 모달창들 = document.querySelectorAll("div div");
+  var [버튼0, 버튼1, 버튼2] = 버튼들;
+  var [모달0, 모달1, 모달2] = 모달창들;
+
+  //   버튼0.addEventListener("click", function () {
+  //     모달0.style.display = "block";
+  //     모달1.style.display = "none";
+  //     모달2.style.display = "none";
+  //   });
+  //   버튼1.addEventListener("click", function () {
+  //     모달1.style.display = "block";
+  //     모달0.style.display = "none";
+  //     모달2.style.display = "none";
+  //   });
+  //   버튼2.addEventListener("click", function () {
+  //     모달2.style.display = "block";
+  //     모달0.style.display = "none";
+  //     모달1.style.display = "none";
+  //   });
+
+  for (var i = 0; i < 3; i++) {
+    console.log({ i }, 버튼들[i], 모달창들[i]);
+    버튼들[i].addEventListener("click", function () {
+      모달창들[i].style.display = "block";
+    });
+  }
+
+  // 자바스크립트는 위에서 아래서 한줄 한줄 실행하다가 반복문을 만난 경우
+  // 1. 반복문 내 코드를 3번 돌린다
+  // 2. 단, 이벤트리스너 내부 코드는 나중에 실행된다
+  // 3. 좀 있다가 버튼을 클릭하면 내부 코드가 실행된다
+  // 4. 내부코드가 실행될때 i값에 실제 숫자로 채우려고 봤더니
+  // 전역변수 var i = 3 밖에 없다 따라서 4번째 div가 없기 때문에 에러가 발생한다
+
+  // 동일하게 let키워드로 사용하면 된다
+  for (let i = 0; i < 3; i++) {
+    let i = 0; // 반복문이 참조할 수 있는 변수의 범위를 줄여준다
+    console.log({ i }, 버튼들[i], 모달창들[i]);
+    버튼들[i].addEventListener("click", function () {
+      const 숫자들 = [0, 1, 2];
+      // 반복문 내 코드를 돌릴때 바로 실행되지 않는다
+      모달창들[i].style.display = "block";
+    });
+  }
+</script>
